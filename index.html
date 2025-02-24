@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Electric Consumption Activity</title> 
+  <link rel="stylesheet" href="index.css">
+  <script src="index.js"></script>
+</head>
+<body>
+    
+  <div class="container">
+  <div class="first-container">
+     <section class="first-section">  
+       <h1 class="first-h1">ELECTRIC CONSUMPTION <br>CALCULATOR</h1>
+       
+       <p class="first-p"> The Electric Consumption Calculator is a simple and efficient tool designed to
+         help users estimate their electricity costs. By entering the meter number,
+          previous reading, current reading, and cost per kWh, the calculator determines the total energy consumption and the corresponding cost.</p>
+
+          <img class="first-img" src="Images/Gif/Turbine.WebDEv.gif" alt="Name">
+      
+      </section>
+    </div>
+    <div class="second-container">
+      <section class="second-section">
+      <form action="" >
+       
+        <label for="meter">Meter Number</label><br>
+        <input type="text" placeholder="Enter the meter number" name="meter" id="meter" pattern="[A-Za-z]{4}\d{4}" required><br>
+       
+        <hr>
+        
+        <label for="prevRead">Previous Reading</label><br>
+        <input type="text" placeholder="Enter  the previous reading" id="prevRead" name="prevRead" pattern="\d{5}" maxlength="5" required><br>
+            
+        <label for="">Current Reading</label><br>
+        <input type="text" placeholder="Enter the current reading"><br>
+
+        <label for="">Cost</label><br>
+        <input type="text" placeholder="Enter the cost per kweh" ><br>
+        
+        <hr>
+        <input type="submit" class="calcButton" value="Calculate!">
+      </form> 
+    </section>
+    
+  </div>
+  </div>
+</body>
+</html>
