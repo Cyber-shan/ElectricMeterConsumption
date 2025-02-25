@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagonal Split UI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Diagonal Background */
+        .container {
+            position: absolute;
+            top: 0;
+            width: 75vw;
+            height: 100vh;
+            transform: skewX(-20deg);
+        }
+
+        .left {
+            background: linear-gradient(130.41deg, #DEE4FA 14.55%, #5B78DF 79.57%);
+            left: -15vw;
+            transform-origin: top right;
+        }
+
+        .right {
+            background: rgba(47, 54, 95);
+            right: -25vw;
+            transform-origin: top left;
+        }
+
+        /* Layout Wrapper */
+        .content {
+            display: flex;
+            align-items: center;
+            width: 80%;
+            position: absolute;
+            z-index: 2;
+        }
+
+        /* Image / GIF */
+        .image-container {
+            flex: 1;
+            text-align: center;
+        }
+
+        .image-container img {
+            width: 450px;
+        }
+
+        /* Text Content */
+        .text-container {
+            flex: 0.75;
+            color: white;
+            padding: 20px;
+        }
+
+        /* Monthly Consumption Box */
+        .consumption-box {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            width: 100%;
+            text-align: left;
+            margin-bottom: 20px;
+            max-width: 400px;
+        }
+
+        .consumption-box p {
+            font-size: 1.2rem;
+            color: black;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        .consumption-box .value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: rgba(223, 115, 91, 1);
+            text-align: left;
+            display: block;
+        }
+
+        /* Paragraph Text */
+        .text-container p {
+            font-size: 1.20rem;
+            line-height: 1.5;
+            max-width: 400px;
+        }
+
+        /* Button */
+        .button-container {
+            margin-top: 20px;
+        }
+
+        .button {
+            background: rgba(223, 115, 91, 1);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            display: block;
+            text-align: center;
+        }
+
+        .button:hover {
+            background: rgba(200, 90, 70, 1);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container left"></div>
+    <div class="container right"></div>
+
+    <div class="content">
+        <!-- Cat Image -->
+        <div class="image-container">
+            <img src="Images/Gif/Cat Waggy tail.gif" alt="Cat GIF">
+        </div>
+
+        <!-- Text Content -->
+        <div class="text-container">
+            <div class="consumption-box">
+                <p>Monthly Consumption</p>
+                <span class="value">345.23 / kwh</span>
+            </div>
+            <p>With this web application, we can efficiently calculate the monthly electricity consumption of your home. By inputting essential details such as the meter number, previous reading, current reading, and cost per kWh, the system quickly determines the total energy usage and the estimated bill. This tool helps users track their electricity consumption, making it easier to manage energy costs and identify opportunities to save power.</p>
+
+            <!-- Button -->
+            <div class="button-container">
+                <button class="button">SAYONARA!</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

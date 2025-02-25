@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const prevReadInput = document.getElementById('prevRead');
   const currReadInput = document.getElementById('currRead');
+  const costInput = document.getElementById('cost');
 
   // Create error message spans
   const prevReadError = document.createElement('span');
@@ -13,6 +14,10 @@ document.addEventListener('DOMContentLoaded', function() {
   const currReadError = document.createElement('span');
   currReadError.classList.add('error-message');
   currReadInput.insertAdjacentElement('afterend', currReadError);
+
+  const costError = document.createElement('span');
+  costError.classList.add('error-message');
+  costInput.insertAdjacentElement('afterend', costError);
 
   const form = document.querySelector('form');
 
@@ -52,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
   }
 
-  // Function to validate Current Meter Reading (Only triggers when user interacts with it)
+  // Function to validate Current Meter Reading
   function validateCurrRead() {
       if (currReadInput.value.trim() === "") {
           currReadError.textContent = "";
@@ -89,16 +94,38 @@ document.addEventListener('DOMContentLoaded', function() {
       }
   }
 
+  // Function to validate Cost per kWh
+  function validateCost() {
+      const costValue = costInput.value.trim();
+
+      if (costValue === "" || isNaN(costValue) || parseFloat(costValue) <= 0) {
+          costError.textContent = "Cost per kWh must be a number greater than 0.";
+          costError.style.display = 'block';
+          costInput.style.border = '2px solid #ff0000';
+          return false;
+      } else {
+          costError.textContent = "";
+          costError.style.display = 'none';
+          costInput.style.border = 'none';
+          return true;
+      }
+  }
+
+  // Set default cost value (e.g., 0.10) but allow editing
+  
+  costInput.addEventListener('input', validateCost);
+
   // Validate on input change
   meterInput.addEventListener('input', validateMeter);
   prevReadInput.addEventListener('input', function () {
       validatePrevRead();
   });
   currReadInput.addEventListener('input', validateCurrRead);
+  costInput.addEventListener('input', validateCost);
 
   // Validate on form submission
   form.addEventListener('submit', function(event) {
-      if (!validateMeter() || !validatePrevRead() || !validateCurrRead()) {
+      if (!validateMeter() || !validatePrevRead() || !validateCurrRead() || !validateCost()) {
           event.preventDefault(); // Prevent form submission if any validation fails
       }
   });

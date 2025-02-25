@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagonal Split with Text & GIF</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .container {
+            position: absolute;
+            top: 0;
+            width: 75vw; /* Extra width to remove gaps */
+            height: 100vh;
+            transform: skewX(10deg); /* Flipped skew direction */
+        }
+
+        .left {
+            background: linear-gradient(130.41deg, #DEE4FA 14.55%, #5B78DF 79.57%);
+            left: -15vw;
+            transform-origin: top left;
+        }
+
+        .right {
+            background: rgba(47, 54, 95);
+            right: -15vw;
+            transform-origin: top right;
+        }
+
+        /* Centered Text & GIF */
+        .content {
+            position: absolute;
+            z-index: 2; /* Ensures it's above the background */
+            text-align: center;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            left: 400px;
+        }
+
+        h1 {
+            font-size: 5rem; /* Increased font size */
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 10px; /* Adjust spacing */
+            text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
+            color: rgba(223, 115, 91, 1); /* Updated text color */
+            display: inline-block;
+        }
+
+        /* Box-style "dots" */
+        .boxes {
+            display: inline-flex;
+            gap: 35px; /* Space between boxes */
+            margin-left: 10px;
+            
+        }
+
+        .box {
+            width: 15px; /* Box size */
+            height: 15px;
+            background-color: rgba(223, 115, 91, 1); /* Same color as text */
+            display: inline-block;
+        }
+
+        .gif img {
+            width: 400px; /* Increased GIF size */
+            animation: bounce 2s infinite;
+            image-rendering: crisp-edges;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+        
+
+    </style>
+</head>
+<body>
+    <div class="container left"></div>
+    <div class="container right"></div>
+
+    <!-- Centered Content -->
+    <div class="content">
+        <h1>CALCULATING 
+            <span class="boxes">
+                <span class="box"></span>
+                <span class="box"></span>
+                <span class="box"></span>
+            </span>
+        </h1>
+        <div class="gif">
+            <img src="Images/Gif/sleepycat.gif" alt="Loading">
+        </div>
+    </div>
+</body>
+</html>
+
