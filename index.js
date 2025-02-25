@@ -1,46 +1,105 @@
-   // METER
-document.getElementById('meter').addEventListener('input', function(e) {
+document.addEventListener('DOMContentLoaded', function() {
+  const meterInput = document.getElementById('meter');
+  const meterError = document.getElementById('meter-error');
 
-  // Convert to uppercase and remove invalid characters
-  let value = this.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
-   
-  // Split into letters and numbers
-   let letters = value.match(/[A-Z]/g) || [];
-   let numbers = value.match(/\d/g) || [];
+  const prevReadInput = document.getElementById('prevRead');
+  const currReadInput = document.getElementById('currRead');
 
-   // Build new value with format: 4 letters + 4 numbers
-   let newValue = letters.slice(0,4).join('') + numbers.slice(0,4).join('');
+  // Create error message spans
+  const prevReadError = document.createElement('span');
+  prevReadError.classList.add('error-message');
+  prevReadInput.insertAdjacentElement('afterend', prevReadError);
 
-   // Update input value (max 8 characthers)
-   this.value = newValue.slice(0.8);
+  const currReadError = document.createElement('span');
+  currReadError.classList.add('error-message');
+  currReadInput.insertAdjacentElement('afterend', currReadError);
 
-    // Force uppercase for the letters portion
-    if(letters.length < 4 ) {
-      this.value = this.value.toUpperCase;
-    }
+  const form = document.querySelector('form');
 
+  // Function to validate meter number
+  function validateMeter() {
+      const meterValue = meterInput.value.trim();
+      const meterPattern = /^[A-Za-z]{4}\d{4}$/;
+      
+      if (!meterPattern.test(meterValue)) {
+          meterError.textContent = "Meter number must be 8 characters: 4 letters followed by 4 numbers (e.g. ABCD1234)";
+          meterError.style.display = 'block';
+          meterInput.style.border = '2px solid #ff0000';
+          return false;
+      } else {
+          meterError.textContent = "";
+          meterError.style.display = 'none';
+          meterInput.style.border = 'none';
+          return true;
+      }
+  }
+
+  // Function to validate Previous Meter Reading
+  function validatePrevRead() {
+      const prevReadValue = prevReadInput.value.trim();
+      const prevReadPattern = /^\d{5}$/; // Must be exactly 5 digits
+
+      if (!prevReadPattern.test(prevReadValue)) {
+          prevReadError.textContent = "Previous reading must be exactly 5 digits and non-negative.";
+          prevReadError.style.display = 'block';
+          prevReadInput.style.border = '2px solid #ff0000';
+          return false;
+      } else {
+          prevReadError.textContent = "";
+          prevReadError.style.display = 'none';
+          prevReadInput.style.border = 'none';
+          return true;
+      }
+  }
+
+  // Function to validate Current Meter Reading (Only triggers when user interacts with it)
+  function validateCurrRead() {
+      if (currReadInput.value.trim() === "") {
+          currReadError.textContent = "";
+          currReadError.style.display = 'none';
+          currReadInput.style.border = 'none';
+          return true;
+      }
+
+      const prevReadValue = parseInt(prevReadInput.value.trim(), 10);
+      const currReadValue = parseInt(currReadInput.value.trim(), 10);
+      const currReadPattern = /^\d{5}$/; // Must be exactly 5 digits
+
+      if (!currReadPattern.test(currReadInput.value.trim())) {
+          currReadError.textContent = "Current reading must be exactly 5 digits and non-negative.";
+          currReadError.style.display = 'block';
+          currReadInput.style.border = '2px solid #ff0000';
+          return false;
+      } else if (!validatePrevRead()) {
+          // Do not show current reading errors if previous reading is invalid
+          currReadError.textContent = "";
+          currReadError.style.display = 'none';
+          currReadInput.style.border = 'none';
+          return false;
+      } else if (currReadValue < prevReadValue) {
+          currReadError.textContent = "Current reading must be greater than or equal to previous reading.";
+          currReadError.style.display = 'block';
+          currReadInput.style.border = '2px solid #ff0000';
+          return false;
+      } else {
+          currReadError.textContent = "";
+          currReadError.style.display = 'none';
+          currReadInput.style.border = 'none';
+          return true;
+      }
+  }
+
+  // Validate on input change
+  meterInput.addEventListener('input', validateMeter);
+  prevReadInput.addEventListener('input', function () {
+      validatePrevRead();
+  });
+  currReadInput.addEventListener('input', validateCurrRead);
+
+  // Validate on form submission
+  form.addEventListener('submit', function(event) {
+      if (!validateMeter() || !validatePrevRead() || !validateCurrRead()) {
+          event.preventDefault(); // Prevent form submission if any validation fails
+      }
+  });
 });
-
-  // PREV METER READING 
-
-  document.getElementById('numericInput').addEventListener('input', function(e) {
-    // Remove any non-digit characters
-    this.value = this.value.replace(/\D/g, '');
-    
-    // Truncate to 5 digits
-    if(this.value.length > 5) {
-      this.value = this.value.slice(0,5);
-    }
-  });
-  
-  // Optional: Prevent paste of non-numeric content
-  document.getElementById('numericInput').addEventListener('paste', function(e) {
-    const pasteData = e.clipboardData.getData('text').replace(/\D/g, '');
-    e.preventDefault();
-    this.value = pasteData.slice(0,5);
-  });
-
-
- // CURRENT READING 
- 
- 

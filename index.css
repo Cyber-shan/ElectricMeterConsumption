@@ -113,5 +113,17 @@ hr {
  margin-left: -13.5%;
 }
 
+/* Input Invalid Css */
+
+.error-message {
+  color: #ff0000;
+  font-size: 14px;
+  margin-top: 5px;
+  display: none;
+  text-align: left;
+}
+
+
+
 /* JavaScript CSS */
 

@@ -27,18 +27,21 @@
       <form action="" >
        
         <label for="meter">Meter Number</label><br>
-        <input type="text" placeholder="Enter the meter number" name="meter" id="meter" pattern="[A-Za-z]{4}\d{4}" required><br>
-       
+        <input type="text" placeholder="Enter the meter number" name="meter" id="meter" pattern="[A-Za-z]{4}\d{4}" required style="border: none;">
+        <span class="error-message" id="meter-error"></span>
         <hr>
         
         <label for="prevRead">Previous Reading</label><br>
         <input type="text" placeholder="Enter  the previous reading" id="prevRead" name="prevRead" pattern="\d{5}" maxlength="5" required><br>
+        <span class="error-message" id="meter-error"></span>
             
-        <label for="">Current Reading</label><br>
-        <input type="text" placeholder="Enter the current reading"><br>
+        <label for="currRead">Current Reading</label><br>
+        <input type="text" placeholder="Enter the current reading" pattern="\d{5}" id="currRead" maxlength="5" required><br>
+        <span class="error-message" id="meter-error"></span>
 
-        <label for="">Cost</label><br>
-        <input type="text" placeholder="Enter the cost per kweh" ><br>
+        <label for="cost">Cost</label><br>
+        <input type="text" placeholder="Enter the cost per kweh" id="cost" required ><br>
+        <span class="error-message" id="meter-error"></span>
         
         <hr>
         <input type="submit" class="calcButton" value="Calculate!">
