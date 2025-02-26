@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diagonal Split UI</title>
+    <title>Electricity Consumption Results</title>
     <style>
         * {
             margin: 0;
@@ -79,15 +79,25 @@
             margin-bottom: 20px;
             max-width: 400px;
         }
+        
+        .cost-box {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            width: 100%;
+            text-align: left;
+            margin-bottom: 20px;
+            max-width: 400px;
+        }
 
-        .consumption-box p {
+        .consumption-box p, .cost-box p {
             font-size: 1.2rem;
             color: black;
             margin-bottom: 5px;
             text-align: left;
         }
 
-        .consumption-box .value {
+        .consumption-box .value, .cost-box .value {
             font-size: 2rem;
             font-weight: bold;
             color: rgba(223, 115, 91, 1);
@@ -126,6 +136,7 @@
             background: rgba(200, 90, 70, 1);
         }
     </style>
+    <script src="index.js"></script>
 </head>
 <body>
 
@@ -142,9 +153,15 @@
         <div class="text-container">
             <div class="consumption-box">
                 <p>Monthly Consumption</p>
-                <span class="value">345.23 / kwh</span>
+                <span class="value">0.00 kWh</span>
             </div>
-            <p>With this web application, we can efficiently calculate the monthly electricity consumption of your home. By inputting essential details such as the meter number, previous reading, current reading, and cost per kWh, the system quickly determines the total energy usage and the estimated bill. This tool helps users track their electricity consumption, making it easier to manage energy costs and identify opportunities to save power.</p>
+            
+            <div class="cost-box">
+                <p>Total Cost</p>
+                <span class="total-cost value">₱0.00</span>
+            </div>
+            
+            <p>With this web application, we can efficiently calculate the monthly electricity consumption of your home. By inputting essential details such as the meter number, previous reading, current reading, and cost per kWh, the system quickly determines the total energy usage and the estimated bill.</p>
 
             <!-- Button -->
             <div class="button-container">
@@ -153,5 +170,21 @@
         </div>
     </div>
 
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Retrieve values from localStorage
+        const consumption = localStorage.getItem('consumption') || "0.00";
+        const totalCost = localStorage.getItem('totalCost') || "0.00";
+        
+        // Update the displayed values
+        document.querySelector('.consumption-box .value').textContent = consumption + ' kWh';
+        document.querySelector('.cost-box .total-cost').textContent = '₱' + totalCost;
+        
+        // Add event listener to Sayonara button
+        document.querySelector('.button').addEventListener('click', function() {
+            window.location.href = 'end.html';
+        });
+    });
+    </script>
 </body>
 </html>

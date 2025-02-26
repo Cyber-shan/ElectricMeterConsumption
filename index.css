@@ -4,8 +4,6 @@ body{
   height: 100vh;
 }
 
-
-
 .container{
   display: flex;
   height: 100vh;
@@ -15,7 +13,7 @@ body{
 /* First Container */
 .first-container {
   background: linear-gradient(130.41deg, #DEE4FA 14.55%, #5B78DF 79.57%);
- width: 50%;
+  width: 50%;
   overflow: hidden;
 }
 
@@ -23,17 +21,16 @@ body{
   text-align: left;
   margin: 140px auto 0 auto;
   width: 65%; 
- 
 }
 
 .first-h1{
   font-size: 35px;
   color: #DF735B;
- }
+}
 
 .first-p{
- font-weight: 400;
- font-size: x-large;
+  font-weight: 400;
+  font-size: x-large;
 }
 
 .first-img{
@@ -46,14 +43,10 @@ h1, p {
   text-wrap: balance;  
 }
 
-
-
-
 /* Second Container */
 .second-container {
   background: rgba(47, 54, 95);
   width: 50%
-  
 }
 
 .second-section {
@@ -62,17 +55,11 @@ h1, p {
   align-items: center;
   justify-content: center;
   height: 100%;
-  
-}
-
-
-.second-section label {
-  color: aliceblue;
 }
 
 .second-section label {
   color: aliceblue;
-  margin-bottom: 10px;
+  margin-bottom: 0;
 }
 
 .second-section input {
@@ -82,7 +69,7 @@ h1, p {
   font-size: 16px;
   background-color: #fff; 
   color: #000; 
-  margin: 10px 0;
+  margin: -5px 0 10px 0;
   box-sizing: border-box;
   min-width: 500px;
   min-height: 50px; 
@@ -90,40 +77,61 @@ h1, p {
   appearance: none; 
   -webkit-appearance: none;
   outline: none;
+  transition: border 0.3s ease;
 }
 
 .second-section input::placeholder{
   text-align: left;
-  
 }
 
-.second-section input[type ="submit"] {
+.second-section input[type="submit"] {
   background-color: #DF735B;
   color: aliceblue;
   cursor: pointer;
   text-align: center;
+  border: none !important;
 }
 
+.second-section input[type="submit"]:hover {
+  background-color: #c86349;
+}
 
 hr {
- width: 125%;
- background: rgba(217, 217, 217, 0.08);
- border: none;
- height: 2px;
- margin-left: -13.5%;
+  width: 125%;
+  background: rgba(217, 217, 217, 0.08);
+  border: none;
+  height: 2px;
+  margin-left: -13.5%;
 }
 
-/* Input Invalid Css */
-
+/* Input Invalid CSS */
 .error-message {
   color: #ff0000;
   font-size: 14px;
   margin-top: 5px;
   display: none;
   text-align: left;
+  width: 100%;
+  max-width: 500px;
 }
 
+/* Input Focus Style */
+.second-section input:focus {
+  border: 2px solid #5B78DF;
+  outline: none;
+}
 
+/* Input Error Style */
+.second-section input.error {
+  border: 2px solid #ff0000;
+}
 
-/* JavaScript CSS */
-
+/* Form Layout */
+form {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  
+}
