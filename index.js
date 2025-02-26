@@ -69,10 +69,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to validate Previous Meter Reading
     function validatePrevRead() {
       const prevReadValue = prevReadInput.value.trim();
-      const prevReadPattern = /^\d{5}$/; // Must be exactly 5 digits
-  
+      const prevReadPattern = /^\d{1,5}(\.\d+)?$/; // 1-5 digits with optional decimal
+    
       if (!prevReadPattern.test(prevReadValue)) {
-        prevReadError.textContent = "Previous reading must be exactly 5 digits and non-negative.";
+        prevReadError.textContent = "Previous reading must be 1-5 digits and can include decimals.";
         prevReadError.style.display = 'block';
         prevReadInput.style.border = '2px solid #ff0000';
         return false;
@@ -87,14 +87,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to validate Current Meter Reading
     function validateCurrRead() {
       const currReadValue = currReadInput.value.trim();
-      const currReadPattern = /^\d{5}$/; // Must be exactly 5 digits
+      const currReadPattern = /^\d{1,5}(\.\d+)?$/; // 1-5 digits with optional decimal
       
       if (!currReadPattern.test(currReadValue)) {
-        currReadError.textContent = "Current reading must be exactly 5 digits and non-negative.";
+        currReadError.textContent = "Current reading must be 1-5 digits and can include decimals.";
         currReadError.style.display = 'block';
         currReadInput.style.border = '2px solid #ff0000';
         return false;
-      } else if (parseInt(currReadValue) < parseInt(prevReadInput.value.trim())) {
+      } else if (parseFloat(currReadValue) < parseFloat(prevReadInput.value.trim())) {
         currReadError.textContent = "Current reading must be greater than or equal to previous reading.";
         currReadError.style.display = 'block';
         currReadInput.style.border = '2px solid #ff0000';
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return true;
       }
     }
-  
+
     // Function to validate Cost per kWh
     function validateCost() {
       const costValue = costInput.value.trim();
@@ -128,21 +128,33 @@ document.addEventListener('DOMContentLoaded', function() {
     const inputFields = [meterInput, prevReadInput, currReadInput, costInput];
     inputFields.forEach(input => {
       input.addEventListener('focus', function() {
-        this.style.border = '2px solid #5B78DF'; // Highlight with blue border on focus
+        // Only change to blue focus if not currently showing an error
+        if (this.style.border !== '2px solid #ff0000') {
+          this.style.border = '2px solid #5B78DF';
+        }
       });
       
       input.addEventListener('blur', function() {
-        if (this.style.border !== '2px solid #ff0000') { // Only remove if not showing error
+        // Don't remove red error border on blur - let validation handle this
+        if (this.style.border === '2px solid #5B78DF') {
           this.style.border = 'none';
         }
       });
     });
   
     // Validate on input change
-    meterInput.addEventListener('input', validateMeter);
-    prevReadInput.addEventListener('input', validatePrevRead);
-    currReadInput.addEventListener('input', validateCurrRead);
-    costInput.addEventListener('input', validateCost);
+   meterInput.addEventListener('input', function() {
+  validateMeter();
+});
+prevReadInput.addEventListener('input', function() {
+  validatePrevRead();
+});
+currReadInput.addEventListener('input', function() {
+  validateCurrRead();
+});
+costInput.addEventListener('input', function() {
+  validateCost();
+});
   
     // Handle form submission
     form.addEventListener('submit', function(event) {

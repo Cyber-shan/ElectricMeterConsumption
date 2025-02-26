@@ -31,11 +31,11 @@
           <hr>
           
           <label for="prevRead">Previous Reading</label><br>
-          <input type="text" placeholder="Enter the previous reading " id="prevRead" name="prevRead" pattern="\d{5}" maxlength="5" required>
+          <input type="text" placeholder="Enter the previous reading " id="prevRead" name="prevRead" pattern="^\d{1,5}(\.\d+)?$" maxlength="6" required>
           <span class="error-message" id="prevRead-error"></span>
               
           <label for="currRead">Current Reading</label><br>
-          <input type="text" placeholder="Enter the current reading " pattern="\d{5}" id="currRead" maxlength="5" required>
+          <input type="text" placeholder="Enter the current reading " pattern="^\d{1,5}(\.\d+)?$" id="currRead" maxlength="6" required>
           <span class="error-message" id="currRead-error"></span>
 
           <label for="cost">Cost per kWh</label><br>
