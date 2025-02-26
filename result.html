@@ -156,11 +156,7 @@
                 <span class="value">0.00 kWh</span>
             </div>
             
-            <!--
-            <div class="cost-box">
-                <p>Total Cost</p>
-                <span class="total-cost value">₱0.00</span>
-            </div> --> 
+           
             
             <p>With this web application, we can efficiently calculate the monthly electricity consumption of your home. By inputting essential details such as the meter number, previous reading, current reading, and cost per kWh, the system quickly determines the total energy usage and the estimated bill.</p>
 
@@ -178,7 +174,7 @@
         const totalCost = localStorage.getItem('totalCost') || "0.00";
         
         // Update the displayed values
-        document.querySelector('.consumption-box .value').textContent = consumption + ' / kWh';
+        document.querySelector('.consumption-box .value').textContent = totalCost + ' / kWh';
        // document.querySelector('.cost-box .total-cost').textContent = '₱' + totalCost;
         
         // Add event listener to Sayonara button
